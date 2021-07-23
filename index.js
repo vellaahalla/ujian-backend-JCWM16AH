@@ -8,7 +8,7 @@ const app = express()
 app.use(cors())
 
 // main route
-const response = (req, res) => res.status(200).send('<h1>REST API JCWM0506</h1>')
+const response = (req, res) => res.status(200).send('<h1>REST API JCWM16AH</h1>')
 app.get('/', response)
 
 // bind to local machine
