@@ -1,16 +1,25 @@
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const app = express();
 
-// main app
-const app = express()
+// app.use('/images', express.static('images'));
 
-// apply middleware
-app.use(cors())
+const cors = require('cors');
+app.use(cors());
 
-// main route
-const response = (req, res) => res.status(200).send('<h1>REST API JCWM16AH</h1>')
-app.get('/', response)
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// bind to local machine
-const PORT = process.env.PORT || 2000
-app.listen(PORT, () => `CONNECTED : port ${PORT}`)
+// var upload = require('express-fileupload');
+// app.use(upload())
+
+const routes = require('./routes.js');
+const moviesRoutes = require('./moviesRoutes')
+const platform = require('./platform.js');
+
+app.use('/', routes);
+app.use('/', moviesRoutes);
+
+app.listen(platform.port, () => {
+    console.log(`Listening to port ${platform.port}..`);
+});
